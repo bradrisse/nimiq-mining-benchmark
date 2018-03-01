@@ -10,15 +10,12 @@ function runSysInfo() {
     });
 }
 
-function estimateHashRates(cores, speed) {
-    var nodeSlope = 0.95;
+function estimateHashRates(avgHash) {
     var firefoxSlope = 0.39;
     var chromeSlope = 0.26;
-    var coreXSpeed = cores * speed;
     var _esimatedHashRates = {
-        node: parseFloat((coreXSpeed * nodeSlope).toFixed(2)),
-        firefox: parseFloat((coreXSpeed * firefoxSlope).toFixed(2)),
-        chrome: parseFloat((coreXSpeed * chromeSlope).toFixed(2))
+        firefox: parseFloat((avgHash * firefoxSlope).toFixed(2)),
+        chrome: parseFloat((avgHash * chromeSlope).toFixed(2))
     }
 
     return _esimatedHashRates
@@ -117,7 +114,7 @@ function runNimiq(_compData) {
 
                 }
 
-                benchmarkData.estimatedHashRates = estimateHashRates(_compData.cpu.cores, parseFloat(_compData.cpu.speed))
+                benchmarkData.estimatedHashRates = estimateHashRates(parseInt(_hashAverage))
                 console.log('benchmarkData ', JSON.stringify(benchmarkData, null, 4))
 
                 //TODO: Send to benchmark server
