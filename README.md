@@ -10,9 +10,11 @@ An automated mining benchmark for mining Nimiq
 3. If you want to use `yarn` to manage the dependencies, run: `sudo npm install -g yarn`.
 4. Install `gulp` globally: `sudo npm install -g gulp` or `yarn global add gulp`.
 5. Clone this repository: `git clone --recursive https://github.com/bradrisse/nimiq-mining-benchmark.git`.
-6. Enter the core directory: `cd nimiq-mining-benchmark`.
+6. Enter the directory: `cd nimiq-mining-benchmark`.
 7. Run: `npm install` or `yarn`.
 8. Run: `npm run start` or `yarn start`.
+
+** For linux you may need to run with sudo (`sudo yarn start`)
 
 
 ## Sample Output
@@ -49,6 +51,23 @@ Should take less than a minute to see final result.
     type: 'DDR3',
     total: '16 GB',
     clockSpeed: 1600
+  },
+  estimatedHashRates: {
+    node: 16.72,
+    firefox: 6.86,
+    chrome: 4.58
   }
 }
 ```
+
+
+## HashRate Estimations
+
+The estimated hash rates are based on previously tested setups and use a very rough slope calculation. The more benchmarks received, the better these will become. 
+
+
+## Common Issues
+
+1. Error: Cannot find module ...... nimiq_node
+    
+    Fix: `cd core && sudo rm -rf node_modules && yarn && yarn build`
