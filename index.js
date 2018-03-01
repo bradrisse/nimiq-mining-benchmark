@@ -64,8 +64,8 @@ function runNimiq(_compData) {
             hashrates.push(parseInt(hashrate));
 
             if (hashrates.length >= outputInterval) {
-                console.log('hashrates  ', hashrates)
                 const sum = hashrates.reduce((acc, val) => acc + val, 0);
+                const totalRam = _compData.memLayout.reduce((acc, _mem) => acc + _mem.size, 0);
                 $.miner.stopWork()
                 const _hashAverage = (sum / hashrates.length).toFixed(Math.log10(hashrates.length)).padStart(7);
                 const benchmarkData = {
@@ -82,7 +82,9 @@ function runNimiq(_compData) {
                     cpu: {
                         manufacturer: _compData.cpu.manufacturer,
                         brand: _compData.cpu.brand,
-                        cores: _compData.cpu.cores
+                        cores: _compData.cpu.cores,
+                        speed: parseFloat(_compData.cpu.speed),
+                        speedMax: parseFloat(_compData.cpu.speedmax)
                     },
                     os: {
                         platform: _compData.os.platform,
@@ -90,6 +92,12 @@ function runNimiq(_compData) {
                         release: _compData.os.release,
                         kernel: _compData.os.kernel,
                         arch: _compData.os.arch
+                    },
+                    ram: {
+                        type: _compData.memLayout[0].type,
+                        total: _bytesToSize(totalRam, 'GB'),
+                        clockSpeed: _compData.memLayout[0].clockSpeed
+
                     }
 
                 }
@@ -106,5 +114,12 @@ function runNimiq(_compData) {
         process.exit(1);
     });
 }
+
+function _bytesToSize(bytes) {
+    var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+    if (bytes == 0) return '0 Byte';
+    var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+    return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+};
 
 runSysInfo()

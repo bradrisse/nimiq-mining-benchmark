@@ -17,29 +17,38 @@ An automated mining benchmark for mining Nimiq
 
 ## Sample Output
 
+Should take less than a minute to see final result.
+
 ```
 { 
   hashRate: {
-    average: 5559,
-    min: 5089,
-    max: 5724 
+    average: 4833,
+    min: 4092,
+    max: 5265
   },
   system: {
     manufacturer: 'Apple Inc.',
     model: 'MacBookPro11,4',
     version: '1.0'
   },
-  cpu: { 
-    manufacturer: 'Intel®', 
-    brand: 'Core™ i7-4770HQ', 
-    cores: 8 
+  cpu: {
+    manufacturer: 'Intel®',
+    brand: 'Core™ i7-4770HQ',
+    cores: 8,
+    speed: 2.2,
+    speedMax: 2.2
   },
-  os: { 
+  os: {
     platform: 'darwin',
     distro: 'Mac OS X',
     release: '10.12.6',
     kernel: '16.7.0',
-    arch: 'x64' 
-  } 
+    arch: 'x64'
+  },
+  ram: { 
+    type: 'DDR3',
+    total: '16 GB',
+    clockSpeed: 1600
+  }
 }
 ```
