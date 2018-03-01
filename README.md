@@ -13,3 +13,33 @@ An automated mining benchmark for mining Nimiq
 6. Enter the core directory: `cd nimiq-mining-benchmark`.
 7. Run: `npm install` or `yarn`.
 8. Run: `npm run start` or `yarn start`.
+
+
+## Sample Output
+
+```
+{ 
+  hashRate: {
+    average: 5559,
+    min: 5089,
+    max: 5724 
+  },
+  system: {
+    manufacturer: 'Apple Inc.',
+    model: 'MacBookPro11,4',
+    version: '1.0'
+  },
+  cpu: { 
+    manufacturer: 'Intel®', 
+    brand: 'Core™ i7-4770HQ', 
+    cores: 8 
+  },
+  os: { 
+    platform: 'darwin',
+    distro: 'Mac OS X',
+    release: '10.12.6',
+    kernel: '16.7.0',
+    arch: 'x64' 
+  } 
+}
+```
