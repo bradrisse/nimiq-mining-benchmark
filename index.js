@@ -43,7 +43,7 @@ function runNimiq(_compData) {
 
         $.consensus.on('established', () => $.miner.startWork());
         $.consensus.on('lost', () => $.miner.stopWork());
-        $.miner.threads = cores;
+        $.miner.threads = _compData.cpu.cores;
         $.miner.startWork();
 
         $.consensus.on('established', () => {
@@ -58,12 +58,15 @@ function runNimiq(_compData) {
             hashrates.push(hashrate);
 
             if (hashrates.length >= outputInterval) {
-                const account = await $.accounts.get($.wallet.address);
                 const sum = hashrates.reduce((acc, val) => acc + val, 0);
                 $.miner.stopWork()
                 const _hashAverage = (sum / hashrates.length).toFixed(Math.log10(hashrates.length)).padStart(7);
                 const benchmarkData = {
-                    hashAverage: _hashAverage,
+                    hashRate: {
+                        average: _hashAverage,
+                        // min: Math.min(hashrates),
+                        // max: Math.max(hashrates)
+                    },
                     system: {
                         manufacturer: _compData.system.manufacturer,
                         model: _compData.system.model,
