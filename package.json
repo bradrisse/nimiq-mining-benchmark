@@ -1,0 +1,23 @@
+{
+  "name": "nimiq-mining-benchmark",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "postinstall": "cd core && npm install  && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bradrisse/nimiq-mining-benchmark.git"
+  },
+  "author": "Brad Risse",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bradrisse/nimiq-mining-benchmark/issues"
+  },
+  "homepage": "https://github.com/bradrisse/nimiq-mining-benchmark#readme",
+  "dependencies": {
+    "systeminformation": "^3.37.4"
+  }
+}
