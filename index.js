@@ -10,6 +10,20 @@ function runSysInfo() {
     });
 }
 
+function estimateHashRates(cores, speed) {
+    var nodeSlope = 0.95;
+    var firefoxSlope = 0.39;
+    var chromeSlope = 0.26;
+    var coreXSpeed = cores * speed;
+    var _esimatedHashRates = {
+        node: parseFloat((coreXSpeed * nodeSlope).toFixed(2)),
+        firefox: parseFloat((coreXSpeed * firefoxSlope).toFixed(2)),
+        chrome: parseFloat((coreXSpeed * chromeSlope).toFixed(2))
+    }
+
+    return _esimatedHashRates
+}
+
 function runNimiq(_compData) {
     console.log('running nimiq miner...')
     const $ = {};
@@ -102,7 +116,9 @@ function runNimiq(_compData) {
                     }
 
                 }
-                console.log('benchmarkData ', benchmarkData)
+
+                benchmarkData.estimatedHashRates = estimateHashRates(_compData.cpu.cores, parseFloat(_compData.cpu.speed))
+                console.log('benchmarkData ', JSON.stringify(benchmarkData, null, 4))
 
                 //TODO: Send to benchmark server
                 hashrates.length = 0;
