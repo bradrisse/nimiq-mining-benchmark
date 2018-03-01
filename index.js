@@ -4,8 +4,7 @@ const si = require('systeminformation');
 
 function runSysInfo() {
     si.getStaticData(function(_compData) {
-        console.log('_compData ', _compData)
-        //runNimiq(_compData)
+        runNimiq(_compData)
     });
 }
 
