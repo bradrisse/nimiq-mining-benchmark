@@ -14,6 +14,7 @@ function runNimiq(_compData) {
     console.log('running nimiq miner...')
     const $ = {};
     const TAG = 'Node';
+    const type = 'light';
 
     Nimiq.Log.instance.level = 'LOG_DISABLE';
 
