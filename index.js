@@ -3,14 +3,19 @@ const si = require('systeminformation');
 
 
 function runSysInfo() {
+    console.log('getting system info...')
     si.getStaticData(function(_compData) {
+        console.log('system info received')
         runNimiq(_compData)
     });
 }
 
 function runNimiq(_compData) {
+    console.log('running nimiq miner...')
     const $ = {};
     const TAG = 'Node';
+
+    Nimiq.Log.instance.level = 'LOG_DISABLE';
 
     (async () => {
         const networkConfig = new Nimiq.DumbNetworkConfig();
@@ -55,6 +60,7 @@ function runNimiq(_compData) {
         const outputInterval = typeof statisticsOptions === 'number' ? statisticsOptions : 30; // seconds
 
         $.miner.on('hashrate-changed', async (hashrate) => {
+            console.log('hashrate: ', hashrate)
             hashrates.push(hashrate);
 
             if (hashrates.length >= outputInterval) {
