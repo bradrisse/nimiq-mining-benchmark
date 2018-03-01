@@ -1,19 +1,15 @@
 const Nimiq = require('./core/dist/node.js');
 const si = require('systeminformation');
 
-var cpuData = {}, osData = {};
 
 function runSysInfo() {
-    si.cpu(function(_cpuData) {
-        cpuData = _cpuData;
-        si.osInfo(function(_osData) {
-            osData = _osData;
-            runNimiq(cpuData.cores)
-        });
+    si.getStaticData(function(_compData) {
+        console.log('_compData ', _compData)
+        //runNimiq(_compData)
     });
 }
 
-function runNimiq(cores) {
+function runNimiq(_compData) {
     const $ = {};
     const TAG = 'Node';
 
@@ -69,18 +65,22 @@ function runNimiq(cores) {
                 const _hashAverage = (sum / hashrates.length).toFixed(Math.log10(hashrates.length)).padStart(7);
                 const benchmarkData = {
                     hashAverage: _hashAverage,
+                    system: {
+                        manufacturer: _compData.system.manufacturer,
+                        model: _compData.system.model,
+                        version: _compData.system.version,
+                    },
                     cpu: {
-                        manufacturer: cpuData.manufacturer,
-                        brand: cpuData.brand,
-                        cores: cpuData.cores
+                        manufacturer: _compData.cpu.manufacturer,
+                        brand: _compData.cpu.brand,
+                        cores: _compData.cpu.cores
                     },
                     os: {
-                        platform: osData.platform,
-                        distro: osData.distro,
-                        release: osData.release,
-                        kernel: osData.kernel,
-                        arch: osData.arch,
-
+                        platform: _compData.os.platform,
+                        distro: _compData.os.distro,
+                        release: _compData.os.release,
+                        kernel: _compData.os.kernel,
+                        arch: _compData.os.arch
                     }
 
                 }
