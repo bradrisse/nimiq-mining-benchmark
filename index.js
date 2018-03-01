@@ -61,17 +61,18 @@ function runNimiq(_compData) {
 
         $.miner.on('hashrate-changed', async (hashrate) => {
             console.log('hashrate: ', hashrate)
-            hashrates.push(hashrate);
+            hashrates.push(parseInt(hashrate));
 
             if (hashrates.length >= outputInterval) {
+                console.log('hashrates  ', hashrates)
                 const sum = hashrates.reduce((acc, val) => acc + val, 0);
                 $.miner.stopWork()
                 const _hashAverage = (sum / hashrates.length).toFixed(Math.log10(hashrates.length)).padStart(7);
                 const benchmarkData = {
                     hashRate: {
-                        average: _hashAverage,
-                        // min: Math.min(hashrates),
-                        // max: Math.max(hashrates)
+                        average: parseInt(_hashAverage),
+                        min: Math.min.apply(null, hashrates),
+                        max: Math.max.apply(null, hashrates)
                     },
                     system: {
                         manufacturer: _compData.system.manufacturer,
