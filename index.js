@@ -1,11 +1,12 @@
 const Nimiq = require('./core/dist/node.js');
 const si = require('systeminformation');
-
+const START = Date.now();
 
 function runSysInfo() {
     console.log('getting system info...')
     si.getStaticData(function(_compData) {
         console.log('system info received')
+        process.env.UV_THREADPOOL_SIZE = _compData.cpu.cores * 2;
         runNimiq(_compData)
     });
 }
@@ -60,7 +61,7 @@ function runNimiq(_compData) {
 
         $.consensus.on('established', () => $.miner.startWork());
         $.consensus.on('lost', () => $.miner.stopWork());
-        $.miner.threads = _compData.cpu.cores;
+        $.miner.threads = _compData.cpu.cores * 2;
         $.miner.startWork();
 
         $.consensus.on('established', () => {
