@@ -1,4 +1,5 @@
 const Nimiq = require('./core/dist/node.js');
+const axios = require('axios');
 const si = require('systeminformation');
 const START = Date.now();
 
@@ -116,11 +117,16 @@ function runNimiq(_compData) {
                 }
 
                 benchmarkData.estimatedHashRates = estimateHashRates(parseInt(_hashAverage))
-                console.log('benchmarkData ', JSON.stringify(benchmarkData, null, 4))
+                axios.post('https://nimiqminer.com/api/Benchmarks', benchmarkData)
+                    .then(function (response) {
+                        console.log('benchmarkData ', JSON.stringify(benchmarkData, null, 4))
+                        hashrates.length = 0;
+                        process.exit(0);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
 
-                //TODO: Send to benchmark server
-                hashrates.length = 0;
-                process.exit(0);
             }
         });
 

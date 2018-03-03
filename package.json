@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/bradrisse/nimiq-mining-benchmark#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "systeminformation": "^3.37.4"
   }
 }
