@@ -116,16 +116,10 @@ function runNimiq(_compData) {
 
                 }
 
-                benchmarkData.estimatedHashRates = estimateHashRates(parseInt(_hashAverage))
-                axios.post('https://nimiqminer.com/api/Benchmarks', benchmarkData)
-                    .then(function (response) {
-                        console.log('benchmarkData ', JSON.stringify(benchmarkData, null, 4))
-                        hashrates.length = 0;
-                        process.exit(0);
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
+                console.log('benchmarkData ', JSON.stringify(benchmarkData, null, 4))
+                console.log('Share your stats! If you would like to share your stats with other miners, please visit www.nimiqminer.com/benchmarks. Copy the output and add some additional details.')
+                hashrates.length = 0;
+                process.exit(0);
 
             }
         });
