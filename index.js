@@ -108,9 +108,9 @@ function runNimiq(_compData) {
                         arch: _compData.os.arch
                     },
                     ram: {
-                        type: _compData.memLayout[0].type,
+                        type: _compData.memLayout[0] ? _compData.memLayout[0].type : null,
                         total: _bytesToSize(totalRam, 'GB'),
-                        clockSpeed: _compData.memLayout[0].clockSpeed
+                        clockSpeed: _compData.memLayout[0] ? _compData.memLayout[0].clockSpeed : null
 
                     }
 
